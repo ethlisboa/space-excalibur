@@ -1,6 +1,6 @@
 import { Game, Types } from 'phaser';
 
-import { LoadingScene } from './scenes';
+import { BaseMapScene } from './scenes';
 
 declare global {
     interface Window { 
@@ -13,7 +13,7 @@ const gameConfig: Types.Core.GameConfig = {
 	title: 'Phaser game tutorial',
   type: Phaser.WEBGL,
   parent: 'game',
-  backgroundColor: '#351f1b',
+  backgroundColor: 'black',
   scale: {
     mode: Phaser.Scale.ScaleModes.NONE,
     width: window.innerWidth,
@@ -39,7 +39,7 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [LoadingScene],
+  scene: [BaseMapScene],
 };
 
 window.sizeChanged = () => {
