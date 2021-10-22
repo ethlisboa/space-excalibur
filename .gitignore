@@ -102,3 +102,19 @@ dist
 
 # TernJS port file
 .tern-port
+
+# System and IDE files
+Thumbs.db
+.DS_Store
+.idea
+*.suo
+*.sublime-project
+*.sublime-workspace
+
+# Build Files
+dist
+.parcel-cache
+
+# Vendors
+node_modules/
+
