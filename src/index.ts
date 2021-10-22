@@ -1,9 +1,8 @@
 import { Game, Types } from 'phaser';
-
 import { BaseMapScene } from './scenes';
 
 declare global {
-    interface Window { 
+    interface Window {
         sizeChanged: () => void;
         game: Phaser.Game;
      }
@@ -46,7 +45,7 @@ window.sizeChanged = () => {
     if (window.game.isBooted) {
       setTimeout(() => {
         window.game.scale.resize(window.innerWidth, window.innerHeight);
-  
+
         window.game.canvas.setAttribute(
           'style',
           `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
@@ -54,7 +53,7 @@ window.sizeChanged = () => {
       }, 100);
     }
   };
-  
+
 window.onresize = () => window.sizeChanged();
 
 window.game = new Game(gameConfig);
