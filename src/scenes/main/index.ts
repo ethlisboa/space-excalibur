@@ -1,6 +1,7 @@
 import { Scene } from 'phaser';
 
 export class BaseMapScene extends Scene {
+  private background?: Phaser.GameObjects.TileSprite;
   private avatar?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -19,34 +20,30 @@ export class BaseMapScene extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // Background
-    this.add.tileSprite(0, 0, this.game.canvas.width, this.game.canvas.height, 'stars')
+    this.background = this.add.tileSprite(0, 0, this.game.canvas.width, this.game.canvas.height, 'stars')
       .setOrigin(0)
       .setScrollFactor(0, 1);
 
     // Avatar
-    this.avatar = this.physics.add.sprite(150, 120, 'avatar');
+    this.avatar = this.physics.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 2, 'avatar');
     this.avatar.setGravity(0, 0);
   }
 
   update(): void {
 
     // Avatar Movement (Horizontal)
-    let speed = 160;
-    if (this.cursors?.left.isDown) {
-      this.avatar?.setVelocityX(-speed);
-    } else if (this.cursors?.right.isDown) {
-      this.avatar?.setVelocityX(speed);
-    } else {
-      this.avatar?.setVelocityX(0);
+    let speed = 3;
+    if (this.background && this.cursors?.left.isDown) {
+      this.background.tilePositionX -= speed;
+    } else if (this.background && this.cursors?.right.isDown) {
+      this.background.tilePositionX += speed;
     }
 
     // Avatar Movement (Vertical)
-    if (this.cursors?.up.isDown) {
-      this.avatar?.setVelocityY(-speed);
-    } else if (this.cursors?.down.isDown) {
-      this.avatar?.setVelocityY(speed);
-    } else {
-      this.avatar?.setVelocityY(0);
+    if (this.background && this.cursors?.up.isDown) {
+      this.background.tilePositionY -= speed;
+    } else if (this.background && this.cursors?.down.isDown) {
+      this.background.tilePositionY += speed;
     }
   }
 }
