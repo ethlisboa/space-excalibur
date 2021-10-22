@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -77,6 +78,11 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: 'assets', to: 'assets' }
+        ]
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       inject: true,
@@ -92,8 +98,9 @@ const config = {
     static: {
         directory: path.join(__dirname, 'dist'),
     },
-    port: 5000,
-    hot: true
+    port: 0,
+    hot: true,
+    open: true
   },
 };
 

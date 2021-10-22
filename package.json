@@ -8,7 +8,7 @@
   "private": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "dependencies": {
     "phaser": "3.55.2"
@@ -20,10 +20,10 @@
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
-    "html-webpack-plugin": "^5.4.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.4.0",
     "html-loader": "^3.0.0",
+    "html-webpack-plugin": "^5.4.0",
     "json-loader": "^0.5.7",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.2.4",
