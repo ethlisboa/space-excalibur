@@ -11,7 +11,7 @@ jobs:
         node-version: "16.10"
     - name: Install Dependencies
       run: |
-        yarn --verbose install
+        yarn install
     - name: Run Production Build
       run: |
-        yarn --verbose build
+        yarn build
