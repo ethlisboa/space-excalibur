@@ -1,4 +1,4 @@
-import { Scene } from 'phaser';
+import { Input, Scene } from 'phaser';
 
 export class BaseMapScene extends Scene {
   private map?: Phaser.Tilemaps.Tilemap;
@@ -25,17 +25,25 @@ export class BaseMapScene extends Scene {
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    // Background
-    // this.background = this.add
-    //   .tileSprite(0, 0, this.game.canvas.width, this.game.canvas.height, 'stars')
-    //   .setOrigin(0)
-    //   .setScrollFactor(0, 1);
-
     this.map = this.make.tilemap({key: 'map', tileWidth: 50, tileHeight: 50});
     const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
     const planetsTileset = this.map.addTilesetImage('planet', 'planet')
     const spaceLayer = this.map.createLayer("space", spaceTileset, 0, 0);
     const planetLayer = this.map.createLayer("planets", planetsTileset, 0, 0);
+
+    // this.map.s
+    this.input.on(Input.Events.POINTER_MOVE, (pointer: Input.Pointer) => {
+      if(planetLayer.hasTileAtWorldXY(pointer.worldX, pointer.worldY)) {
+        this.input.setDefaultCursor("pointer");
+      } else {
+        this.input.setDefaultCursor("auto");
+      }
+    });
+
+    this.input.on(Input.Events.POINTER_DOWN, (pointer: Input.Pointer) => {
+      //tile is null if nothing is clicked
+      console.log(planetLayer.getTileAtWorldXY(pointer.worldX, pointer.worldY));
+    })
 
 
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -45,7 +53,6 @@ export class BaseMapScene extends Scene {
       this.game.canvas.height / 2,
       'avatar'
     );
-
     this.avatar.setGravity(0, 0);
     this.avatar.setCollideWorldBounds(true);
 
