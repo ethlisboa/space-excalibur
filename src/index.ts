@@ -1,5 +1,5 @@
 import { Game, Types } from 'phaser';
-import { BaseMapScene } from './scenes';
+import { SpaceBaseScene } from './scenes/main/index';
 
 declare global {
     interface Window {
@@ -9,7 +9,7 @@ declare global {
 }
 
 const gameConfig: Types.Core.GameConfig = {
-	title: 'Phaser game tutorial',
+	title: 'SpaceXcalibur',
   type: Phaser.WEBGL,
   parent: 'game',
   backgroundColor: 'black',
@@ -28,6 +28,7 @@ const gameConfig: Types.Core.GameConfig = {
     antialiasGL: false,
     pixelArt: true,
   },
+  disableContextMenu: true,
   callbacks: {
     postBoot: () => {
       window.sizeChanged();
@@ -38,7 +39,7 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [BaseMapScene],
+  scene: [SpaceBaseScene],
 };
 
 window.sizeChanged = () => {
