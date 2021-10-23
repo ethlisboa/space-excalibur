@@ -1,7 +1,7 @@
 import { Scene } from 'phaser';
 
 export class BaseMapScene extends Scene {
-  private background?: Phaser.GameObjects.TileSprite;
+  private map?: Phaser.Tilemaps.Tilemap;
   private avatar?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -14,8 +14,10 @@ export class BaseMapScene extends Scene {
   }
 
   preload() {
-    this.load.image('stars', 'assets/bg/stars.png');
     this.load.image('avatar', 'assets/sprites/avatar.png')
+    this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
+    this.load.image('planet', 'assets/map/Tilesets/planet.png');
+    this.load.tilemapTiledJSON('map', 'assets/map/map.json');
   }
 
   create(): void {
@@ -24,10 +26,16 @@ export class BaseMapScene extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // Background
-    this.background = this.add
-      .tileSprite(0, 0, this.game.canvas.width, this.game.canvas.height, 'stars')
-      .setOrigin(0)
-      .setScrollFactor(0, 1);
+    // this.background = this.add
+    //   .tileSprite(0, 0, this.game.canvas.width, this.game.canvas.height, 'stars')
+    //   .setOrigin(0)
+    //   .setScrollFactor(0, 1);
+
+    this.map = this.make.tilemap({key: 'map', tileWidth: 50, tileHeight: 50});
+    const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
+    const planetsTileset = this.map.addTilesetImage('planets', 'planet')
+    const spaceLayer = this.map.createLayer("space", spaceTileset, 0, 0);
+    const planetLayer = this.map.createLayer("planets", planetsTileset, 0, 0);
 
     // Avatar
     this.avatar = this.physics.add.sprite(
@@ -36,6 +44,10 @@ export class BaseMapScene extends Scene {
       'avatar'
     );
     this.avatar.setGravity(0, 0);
+    this.avatar.setCollideWorldBounds(true);
+
+    this.cameras.main.startFollow(this.avatar, true)
+    this.cameras.main.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels, true);
 
     // Debugging
     if (this.isDebugging) {
@@ -45,19 +57,21 @@ export class BaseMapScene extends Scene {
 
   update(): void {
 
-    // Avatar Movement (Horizontal)
-    let speed = 3;
-    if (this.background && this.cursors?.left.isDown) {
-      this.background.tilePositionX -= speed;
-    } else if (this.background && this.cursors?.right.isDown) {
-      this.background.tilePositionX += speed;
-    }
+    // Avatar Movement 
+    this.avatar?.setVelocityX(0);
+    this.avatar?.setVelocityY(0);
 
-    // Avatar Movement (Vertical)
-    if (this.background && this.cursors?.up.isDown) {
-      this.background.tilePositionY -= speed;
-    } else if (this.background && this.cursors?.down.isDown) {
-      this.background.tilePositionY += speed;
+    if(this.cursors?.up.isDown === true) {
+      this.avatar?.setVelocityY(-100);
+    }
+    if (this.cursors?.down.isDown === true) {
+      this.avatar?.setVelocityY(100);
+    }
+    if (this.cursors?.left.isDown === true) {
+      this.avatar?.setVelocityX(-100);
+    }
+    if (this.cursors?.right.isDown === true) {
+      this.avatar?.setVelocityX(100);
     }
 
     // Debugging
@@ -67,6 +81,7 @@ export class BaseMapScene extends Scene {
   }
 
   getPositionXY(): string {
-    return "TilePosition: " + this.background?.tilePositionX.toString() + "," + this.background?.tilePositionY.toString();
+    return "";
+    // return "TilePosition: " + this.background?.tilePositionX.toString() + "," + this.background?.tilePositionY.toString();
   }
 }
