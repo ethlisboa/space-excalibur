@@ -1,9 +1,9 @@
 import { Physics } from "phaser";
-import { BaseMapScene } from './index';
+import { SpaceBaseScene } from './index';
 
 export class Avatar extends Physics.Arcade.Sprite {
 
-    constructor(scene: BaseMapScene) {
+    constructor(scene: SpaceBaseScene) {
         super(scene, scene.game.canvas.width / 2,
             scene.game.canvas.height / 2, 'avatar')
         scene.sys.displayList.add(this);

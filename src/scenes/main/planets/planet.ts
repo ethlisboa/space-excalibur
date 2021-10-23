@@ -1,10 +1,10 @@
 import { Input } from 'phaser';
-import { BaseMapScene } from '../index';
+import { SpaceBaseScene } from '../index';
 
 export class Planet extends Phaser.GameObjects.Sprite {
     public id: string;
 
-    constructor(scene: BaseMapScene, x: number, y: number, texture: string) {
+    constructor(scene: SpaceBaseScene, x: number, y: number, texture: string) {
         super(scene, scene.game.canvas.width / 2,
             scene.game.canvas.height / 2, texture);
         scene.sys.displayList.add(this);
