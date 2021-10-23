@@ -1,9 +1,11 @@
+import { Avatar } from './avatar';
 import { Input, Scene } from 'phaser';
+import { renderPlanets } from './planets';
 
 export class BaseMapScene extends Scene {
-  private map?: Phaser.Tilemaps.Tilemap;
-  private avatar?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
+  public map?: Phaser.Tilemaps.Tilemap;
+  public avatar?: Avatar;
+  public cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
 
   private isDebugging = true;
   private debugContainer?: Phaser.GameObjects.Container;
@@ -47,27 +49,17 @@ export class BaseMapScene extends Scene {
       planetGroup.add(planetSprite);
     }
 
-    // Avatar
-    this.avatar = this.physics.add.sprite(
-      this.game.canvas.width / 2,
-      this.game.canvas.height / 2,
-      'avatar'
-    );
-    this.avatar.setGravity(0, 0);
-    this.avatar.setCollideWorldBounds(true);
-    this.avatar.setInteractive({useHandCursor: true});
-    this.avatar.on('pointerdown', () => {
-      this.isDebugging = !this.isDebugging;
-    });
+    renderPlanets(this);
 
-    // Camera
-    this.cameras.main.startFollow(this.avatar, true);
-    this.cameras.main.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels, true);
+    // Avatar
+    this.avatar = new Avatar(this);
+    this.avatar.onClick(() => this.isDebugging = !this.isDebugging);
+    this.physics.add.existing(this.avatar, false);
 
     // Debugging
     if (this.isDebugging) {
       this.debugText = this.add.text(0, 0, "nil", this.debugFontStyle);
-      this.debugBackground = this.add.rectangle(0,0,0,0,0x000);
+      this.debugBackground = this.add.rectangle(0, 0, 0, 0, 0x000);
       this.debugContainer = this.add.container(0, 0);
       this.debugContainer.setSize(160, 120);
       this.debugContainer.add(this.debugBackground)
@@ -78,23 +70,7 @@ export class BaseMapScene extends Scene {
 
   update(): void {
     this.gameTick++;
-
-    // Avatar Movement
-    const movementSpeed = 100;
-    this.avatar?.setVelocityX(0);
-    this.avatar?.setVelocityY(0);
-    if(this.cursors?.up.isDown === true) {
-      this.avatar?.setVelocityY(-movementSpeed);
-    }
-    if (this.cursors?.down.isDown === true) {
-      this.avatar?.setVelocityY(movementSpeed);
-    }
-    if (this.cursors?.left.isDown === true) {
-      this.avatar?.setVelocityX(-movementSpeed);
-    }
-    if (this.cursors?.right.isDown === true) {
-      this.avatar?.setVelocityX(movementSpeed);
-    }
+    this.avatar?.update(this.cursors);
 
     // Debugging
     this.debugContainer?.setVisible(this.isDebugging);
