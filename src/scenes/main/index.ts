@@ -1,3 +1,4 @@
+import { Button } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Input, Scene } from 'phaser';
 import { renderPlanets } from './planets';
@@ -16,6 +17,7 @@ export class BaseMapScene extends Scene {
   }
 
   preload() {
+    this.load.image('btn', 'assets/sprites/buttons/blank-btn.png')
     this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
     this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
     this.load.image('avatar', 'assets/sprites/avatar.png');
@@ -29,6 +31,7 @@ export class BaseMapScene extends Scene {
   }
 
   create(): void {
+    this.scene.launch("menu-scene");
 
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -40,6 +43,7 @@ export class BaseMapScene extends Scene {
     this.map.createLayer("space", spaceTileset, 0, 0);
 
     // Random Planets
+
     renderPlanets(this);
 
     // Avatar
@@ -68,5 +72,6 @@ export class BaseMapScene extends Scene {
         }
       }
     }
+
   }
 }

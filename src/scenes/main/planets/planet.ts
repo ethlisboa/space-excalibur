@@ -17,6 +17,6 @@ export class Planet extends Phaser.GameObjects.Sprite {
     }
 
     newId(): string {
-        return (Math.random() * 1_000_000_000_000).toString(16).slice(0,7);
+        return (Math.random() * 1_000_000_000_000).toString(16).slice(0, 7);
     }
 }
