@@ -19,16 +19,18 @@ export class Button extends Phaser.GameObjects.Container {
     }
 }
 
+// add items[], count and add item picture on top of bg.
 export class Item extends Phaser.GameObjects.Container {
     constructor(scene: Scene, x: number, y: number,) {
         super(scene, x, y);
         this.setSize(50, 50);
         const bg = new GameObjects.Image(scene, 0, 0, 'box-1');
-        this.add(bg)
+        this.add(bg);
+        const ground = new GameObjects.Image(scene, 0, 0, 'comet');
+        this.add(ground) 
         this.setInteractive({useHandCursor: true})
         this.on(Input.Events.POINTER_DOWN, () => {
             console.log("clicked");
         })
     }
-
 }

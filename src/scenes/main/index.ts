@@ -1,4 +1,4 @@
-import { Button } from '../util/buttons';
+import { Button, Item } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Input, Scene } from 'phaser';
 import { renderPlanets } from './planets';
@@ -23,7 +23,6 @@ export class BaseMapScene extends Scene {
   preload() {
     this.load.image('avatar', 'assets/sprites/avatar.png')
     this.load.image('btn', 'assets/sprites/buttons/blank-btn.png')
-    this.load.image('box-1', 'assets/sprites/box-1.png')
     this.load.image('planet-green', 'assets/sprites/planet_green.png')
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
