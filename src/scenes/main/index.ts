@@ -43,8 +43,9 @@ export class SpaceBaseScene extends Scene {
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    this.spaceObjects = this.add.group();
     // Random Planets
-    this.spaceObjects = renderPlanets(this);
+    renderPlanets(this, this.spaceObjects);
 
     // Avatar
     this.avatar = new Avatar(this);
