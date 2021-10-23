@@ -2,8 +2,6 @@ import { Scene } from "phaser";
 import { providers } from "ethers";
 import { web3Modal } from "../../actions/web3";
 import { Button } from "./button";
-import { Item } from "./item";
-import { items } from "./test_items";
 
 export class MenuScene extends Scene {
     constructor() {
@@ -42,11 +40,5 @@ export class MenuScene extends Scene {
             });
         })
         this.add.existing(connectButton);
-
-
-        for (let i = 0; i < items.length; i++) {
-            this.add.existing(new Item(this, 50 + (60 * i), 50, items[i].quantity));
-        }
     }
-
 }

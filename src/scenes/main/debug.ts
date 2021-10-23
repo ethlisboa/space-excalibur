@@ -5,7 +5,7 @@ export class DebugContainer extends Phaser.GameObjects.Container {
 
     private containerBackground?: Phaser.GameObjects.Rectangle;
     private debugText?: Phaser.GameObjects.Text;
-    private fontStyle = { font: "10px Mono", fill: "#fca" };
+    private fontStyle = { font: "12px Mono", fill: "#ffffff" };
     private gameTick = 0;
 
     constructor(scene: SpaceBaseScene) {

@@ -32,6 +32,7 @@ export class SpaceBaseScene extends Scene {
 
   create(): void {
     this.scene.launch("menu-scene");
+    this.scene.launch("ui-scene");
 
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
