@@ -1,4 +1,4 @@
-import { Button } from '../util/buttons';
+import { Button, Item } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
