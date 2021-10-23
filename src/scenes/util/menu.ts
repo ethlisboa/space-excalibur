@@ -1,7 +1,7 @@
 import { Scene } from "phaser";
 import { providers } from "ethers";
 import { web3Modal } from "../../actions/web3";
-import { Button } from "./buttons";
+import { Button } from "./button";
 
 export class MenuScene extends Scene {
     constructor() {
@@ -9,9 +9,9 @@ export class MenuScene extends Scene {
     }
 
     preload() {
-        this.load.image('btn', 'assets/sprites/buttons/blank-btn.png')
-        this.load.image('box-1', 'assets/sprites/box-1.png')
-        this.load.image('comet', 'assets/sprites/comet.png')
+        this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
+        this.load.image('box-1', 'assets/sprites/box-1.png');
+        this.load.image('comet', 'assets/sprites/comet.png');
     }
 
     create(): void {
@@ -28,12 +28,12 @@ export class MenuScene extends Scene {
             connectButton.setText(acc);
             connectButton.disable();
             web3Provider.on("disconnect", () => {
-                connectButton.setText("Connect")
+                connectButton.setText("Connect");
                 connectButton.enable();
             })
             web3Provider.on("accountsChanged", (accounts: any) => {
                 if (accounts.length === 0) {
-                    connectButton.setText("Connect")
+                    connectButton.setText("Connect");
                     connectButton.enable();
                 }
                 connectButton.setText(accounts[0]);
@@ -41,5 +41,4 @@ export class MenuScene extends Scene {
         })
         this.add.existing(connectButton);
     }
-
 }

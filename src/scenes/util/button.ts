@@ -1,4 +1,3 @@
-import { Console } from "console";
 import { Scene, GameObjects, Input } from "phaser";
 
 export class Button extends Phaser.GameObjects.Container {
@@ -11,7 +10,7 @@ export class Button extends Phaser.GameObjects.Container {
         this.setSize(200, 50);
         this.bg = new GameObjects.Image(scene, 0, 0, 'btn');
         this.bg.tint = 0xffffff;
-        this.add(this.bg)
+        this.add(this.bg);
         this.txt = new GameObjects.Text(scene, -20, -6, txt, { fontSize: "large", align: "center", testString: txt })
         this.add(this.txt);
         this.enable();
@@ -23,18 +22,18 @@ export class Button extends Phaser.GameObjects.Container {
 
     public disable() {
         this.removeInteractive();
-        this.off(Input.Events.POINTER_DOWN, this.toggle)
+        this.off(Input.Events.POINTER_DOWN, this.toggle);
     }
 
     public enable() {
-        this.setInteractive({ useHandCursor: true }, () => console.log("Interacted"))
-        this.on(Input.Events.POINTER_DOWN, this.toggle)
+        this.setInteractive({ useHandCursor: true }, () => console.log("Interacted"));
+        this.on(Input.Events.POINTER_DOWN, this.toggle);
     }
 
     public setText(txt: string) {
         this.txt.setText(txt);
         if (this.txt.width > this.width) {
-            this.txt.setFontSize(13)
+            this.txt.setFontSize(13);
         }
         this.txt.setPosition(-1 * (this.txt.width / 2), -6);
     }

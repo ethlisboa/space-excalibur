@@ -14,7 +14,7 @@ export class DebugContainer extends Phaser.GameObjects.Container {
         this.containerBackground = scene.add.rectangle(0, 0, 0, 0, 0x000);
         this.setPosition(0, 0);
         this.setSize(160, 120);
-        this.add(this.containerBackground)
+        this.add(this.containerBackground);
         this.add(this.debugText);
         this.setAlpha(0.5);
     }
