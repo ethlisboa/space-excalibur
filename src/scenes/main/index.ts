@@ -2,6 +2,7 @@ import { Button, Item } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Input, Scene } from 'phaser';
 import { renderPlanets } from './planets';
+import { DebugContainer } from './debug';
 
 export class BaseMapScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
@@ -9,12 +10,7 @@ export class BaseMapScene extends Scene {
   public cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
 
   private isDebugging = true;
-  private debugContainer?: Phaser.GameObjects.Container;
-  private debugBackground?: Phaser.GameObjects.Rectangle;
-  private debugText?: Phaser.GameObjects.Text;
-  private debugWelcome = "Nym: Arthur";
-  private debugFontStyle = { font: "10px Mono", fill: "#fca" };
-  private gameTick = 0;
+  private debugContainer?: DebugContainer;
 
   constructor() {
     super('map-scene');
@@ -34,24 +30,25 @@ export class BaseMapScene extends Scene {
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
 
+    // Background
     this.map = this.make.tilemap({ key: 'map', tileWidth: 50, tileHeight: 50 });
     const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    // Random Planets
     const planetGroup = this.add.group();
     for (let i = 0; i < 100; i++) {
-      const planetSprite = this.make.sprite({ 
+      const planetSprite = this.make.sprite({
         key: 'planet-green',
         x: Phaser.Math.Between(0, this.map.widthInPixels),
-        y: Phaser.Math.Between(0, this.map.heightInPixels) 
+        y: Phaser.Math.Between(0, this.map.heightInPixels)
       }, true).setInteractive({
         useHandCursor: true
       });
       planetSprite.on(Input.Events.POINTER_DOWN, () => console.log("planet clicked"))
       planetGroup.add(planetSprite);
     }
-
     renderPlanets(this);
 
     // Avatar
@@ -61,44 +58,24 @@ export class BaseMapScene extends Scene {
 
     // Debugging
     if (this.isDebugging) {
-      this.debugText = this.add.text(0, 0, "nil", this.debugFontStyle);
-      this.debugBackground = this.add.rectangle(0, 0, 0, 0, 0x000);
-      this.debugContainer = this.add.container(0, 0);
-      this.debugContainer.setSize(160, 120);
-      this.debugContainer.add(this.debugBackground)
-      this.debugContainer.add(this.debugText);
-      this.debugContainer.setAlpha(0.5);
+      this.debugContainer = new DebugContainer(this);
+      this.add.existing(this.debugContainer);
     }
   }
 
   update(): void {
-    this.gameTick++;
-    this.avatar?.update(this.cursors);
+    if (this.avatar) {
 
-    // Debugging
-    this.debugContainer?.setVisible(this.isDebugging);
-    if (this.isDebugging) {
-      this.debugText?.setText(
-        this.debugWelcome
-        + "\nPos: "
-        + this.getPositionXY()
-        + "\nAge: "
-        + this.gameTick
-      );
-      this.debugContainer?.setPosition(
-        this.avatar?.getBottomRight().x,
-        this.avatar?.getBottomRight().y
-      );
-      if (this.debugText) {
-        this.debugBackground?.setSize(this.debugText.displayWidth, this.debugText.displayHeight);
+      // updates the avatar movement
+      this.avatar.update(this.cursors);
+
+      // updates the debug container
+      if (this.debugContainer) {
+        this.debugContainer.setVisible(this.isDebugging);
+        if (this.isDebugging) {
+          this.debugContainer.update(this.avatar);
+        }
       }
     }
-  }
-
-  getPositionXY(): string {
-    return ""
-      + this.avatar?.getTopLeft().x.toFixed(0).toString()
-      + ","
-      + this.avatar?.getTopLeft().y.toFixed(0).toString();
   }
 }
