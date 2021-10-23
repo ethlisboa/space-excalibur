@@ -41,5 +41,4 @@ export class Avatar extends Physics.Arcade.Sprite {
             this.setVelocityX(movementSpeed);
         }
     }
-
 }

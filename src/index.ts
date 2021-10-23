@@ -3,14 +3,14 @@ import { Game, Types } from 'phaser';
 import { SpaceBaseScene } from './scenes/main/index';
 
 declare global {
-    interface Window {
-        sizeChanged: () => void;
-        game: Phaser.Game;
-     }
+  interface Window {
+    sizeChanged: () => void;
+    game: Phaser.Game;
+  }
 }
 
 const gameConfig: Types.Core.GameConfig = {
-	title: 'SpaceXcalibur',
+  title: 'SpaceXcalibur',
   type: Phaser.WEBGL,
   parent: 'game',
   backgroundColor: 'black',
@@ -44,17 +44,17 @@ const gameConfig: Types.Core.GameConfig = {
 };
 
 window.sizeChanged = () => {
-    if (window.game.isBooted) {
-      setTimeout(() => {
-        window.game.scale.resize(window.innerWidth, window.innerHeight);
+  if (window.game.isBooted) {
+    setTimeout(() => {
+      window.game.scale.resize(window.innerWidth, window.innerHeight);
 
-        window.game.canvas.setAttribute(
-          'style',
-          `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
-        );
-      }, 100);
-    }
-  };
+      window.game.canvas.setAttribute(
+        'style',
+        `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
+      );
+    }, 100);
+  }
+};
 
 window.onresize = () => window.sizeChanged();
 

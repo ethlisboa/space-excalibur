@@ -52,9 +52,9 @@ export class SpaceBaseScene extends Scene {
     this.physics.add.existing(this.avatar, false);
 
     // Debugging
-      this.debugContainer = new DebugContainer(this);
-      this.add.existing(this.debugContainer);
-    }
+    this.debugContainer = new DebugContainer(this);
+    this.add.existing(this.debugContainer);
+  }
 
   update(): void {
     if (this.avatar) {
