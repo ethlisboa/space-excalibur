@@ -1,3 +1,4 @@
+import { MenuScene } from './scenes/util/menu';
 import { Game, Types } from 'phaser';
 import { BaseMapScene } from './scenes';
 
@@ -38,7 +39,7 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [BaseMapScene],
+  scene: [BaseMapScene, MenuScene],
 };
 
 window.sizeChanged = () => {

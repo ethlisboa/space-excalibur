@@ -11,7 +11,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "dependencies": {
-    "phaser": "3.55.2"
+    "phaser": "3.55.2",
+    "web3modal": "^1.9.4"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
