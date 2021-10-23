@@ -1,7 +1,8 @@
 import { Scene } from "phaser";
 import { providers } from "ethers";
 import { web3Modal } from "../../actions/web3";
-import { Button } from "./buttons";
+import { Button, Item } from "./buttons";
+import { items } from "./test";
 
 export class MenuScene extends Scene {
     constructor() {
@@ -10,6 +11,8 @@ export class MenuScene extends Scene {
 
     preload() {
         this.load.image('btn', 'assets/sprites/buttons/blank-btn.png')
+        this.load.image('box-1', 'assets/sprites/box-1.png')
+        this.load.image('comet', 'assets/sprites/comet.png')
     }
 
     create(): void {
@@ -38,6 +41,11 @@ export class MenuScene extends Scene {
             });
         })
         this.add.existing(connectButton);
+
+
+        for (let i = 0; i < items.length; i++) {
+            this.add.existing(new Item(this, 50 + (60 * i), 50, items[i].quantity))
+        }
     }
 
 }
