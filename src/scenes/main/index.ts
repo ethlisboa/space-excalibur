@@ -37,12 +37,14 @@ export class BaseMapScene extends Scene {
     const spaceLayer = this.map.createLayer("space", spaceTileset, 0, 0);
     const planetLayer = this.map.createLayer("planets", planetsTileset, 0, 0);
 
+    this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     // Avatar
     this.avatar = this.physics.add.sprite(
       this.game.canvas.width / 2,
       this.game.canvas.height / 2,
       'avatar'
     );
+
     this.avatar.setGravity(0, 0);
     this.avatar.setCollideWorldBounds(true);
 
