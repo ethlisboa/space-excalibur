@@ -36,6 +36,19 @@ export class BaseMapScene extends Scene {
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    const planetGroup = this.add.group();
+    for (let i = 0; i < 100; i++) {
+      const planetSprite = this.make.sprite({ 
+        key: 'planet-green',
+        x: Phaser.Math.Between(0, this.map.widthInPixels),
+        y: Phaser.Math.Between(0, this.map.heightInPixels) 
+      }, true).setInteractive({
+        useHandCursor: true
+      });
+      planetSprite.on(Input.Events.POINTER_DOWN, () => console.log("planet clicked"))
+      planetGroup.add(planetSprite);
+    }
+
     renderPlanets(this);
 
     // Avatar
