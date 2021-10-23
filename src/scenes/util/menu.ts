@@ -30,7 +30,7 @@ export class MenuScene extends Scene {
                 connectButton.enable();
             })
             web3Provider.on("accountsChanged", (accounts: any) => {
-                if(accounts.length === 0) {
+                if (accounts.length === 0) {
                     connectButton.setText("Connect")
                     connectButton.enable();
                 }

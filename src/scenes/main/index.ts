@@ -67,11 +67,11 @@ export class BaseMapScene extends Scene {
       // updates the debug container
       if (this.debugContainer) {
         this.debugContainer.setVisible(this.isDebugging);
-    if (this.isDebugging) {
+        if (this.isDebugging) {
           this.debugContainer.update(this.avatar);
+        }
       }
     }
-  }
 
   }
 }
