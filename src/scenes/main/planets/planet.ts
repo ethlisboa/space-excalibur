@@ -16,13 +16,14 @@ export class Planet extends Phaser.GameObjects.Sprite {
         scene.sys.displayList.add(this);
         scene.sys.updateList.add(this);
 
-        this.id = this.newId();
-        this.infoBox = new PlanetMenu(scene, this.getBottomRight().x, this.getBottomRight().y);
-
         this.setInteractive({ useHandCursor: true });
         this.setPosition(x, y);
         this.setTexture(texture);
-        this.on(Input.Events.POINTER_DOWN, () => console.log(texture + " " + this.id));
+
+        this.id = this.newId();
+        this.infoBox = new PlanetMenu(scene, this.getBottomRight().x, this.getBottomRight().y, this);
+
+        this.on(Input.Events.POINTER_DOWN, () => this.infoBox.setVisible(!this.infoBox.visible));
     }
 
     newId(): string {
