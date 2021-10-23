@@ -15,8 +15,8 @@ export class BaseMapScene extends Scene {
 
   preload() {
     this.load.image('avatar', 'assets/sprites/avatar.png')
+    this.load.image('planet-green', 'assets/sprites/planet_green.png')
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
-    this.load.image('planet', 'assets/map/Tilesets/planet.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
   }
 
@@ -25,25 +25,22 @@ export class BaseMapScene extends Scene {
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.map = this.make.tilemap({key: 'map', tileWidth: 50, tileHeight: 50});
+    this.map = this.make.tilemap({ key: 'map', tileWidth: 50, tileHeight: 50 });
     const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
-    const planetsTileset = this.map.addTilesetImage('planet', 'planet')
-    const spaceLayer = this.map.createLayer("space", spaceTileset, 0, 0);
-    const planetLayer = this.map.createLayer("planets", planetsTileset, 0, 0);
+    this.map.createLayer("space", spaceTileset, 0, 0);
 
-    // this.map.s
-    this.input.on(Input.Events.POINTER_MOVE, (pointer: Input.Pointer) => {
-      if(planetLayer.hasTileAtWorldXY(pointer.worldX, pointer.worldY)) {
-        this.input.setDefaultCursor("pointer");
-      } else {
-        this.input.setDefaultCursor("auto");
-      }
-    });
-
-    this.input.on(Input.Events.POINTER_DOWN, (pointer: Input.Pointer) => {
-      //tile is null if nothing is clicked
-      console.log(planetLayer.getTileAtWorldXY(pointer.worldX, pointer.worldY));
-    })
+    const planetGroup = this.add.group();
+    for (let i = 0; i < 100; i++) {
+      const planetSprite = this.make.sprite({ 
+        key: 'planet-green',
+        x: Phaser.Math.Between(0, this.map.widthInPixels),
+        y: Phaser.Math.Between(0, this.map.heightInPixels) 
+      }, true).setInteractive({
+        useHandCursor: true
+      });
+      planetSprite.on(Input.Events.POINTER_DOWN, () => console.log("planet clicked"))
+      planetGroup.add(planetSprite);
+    }
 
 
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -52,12 +49,18 @@ export class BaseMapScene extends Scene {
       this.game.canvas.width / 2,
       this.game.canvas.height / 2,
       'avatar'
-    );
+    ).setInteractive({ useHandCursor: true });
+    this.avatar.on('pointerdown', function () {
+
+      console.log("avatar clicked");
+
+    });
     this.avatar.setGravity(0, 0);
     this.avatar.setCollideWorldBounds(true);
 
+
     this.cameras.main.startFollow(this.avatar, true)
-    this.cameras.main.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels, true);
+    this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels, true);
 
     // Debugging
     if (this.isDebugging) {
@@ -71,7 +74,7 @@ export class BaseMapScene extends Scene {
     this.avatar?.setVelocityX(0);
     this.avatar?.setVelocityY(0);
 
-    if(this.cursors?.up.isDown === true) {
+    if (this.cursors?.up.isDown === true) {
       this.avatar?.setVelocityY(-100);
     }
     if (this.cursors?.down.isDown === true) {
