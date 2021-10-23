@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const webpack = require("webpack");
 const isProd = process.env.NODE_ENV === 'production';
 
 const babelOptions = {
@@ -60,6 +60,7 @@ const config = {
 
   resolve: {
     extensions: ['.ts', '.js'],
+    fallback: { "stream": false, "os": false, "assert": false, "http": false, "https": false, "buffer": require.resolve('buffer/') }
   },
 
   optimization: {
@@ -79,9 +80,9 @@ const config = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-        patterns: [
-            { from: 'assets', to: 'assets' }
-        ]
+      patterns: [
+        { from: 'assets', to: 'assets' }
+      ]
     }),
     new HtmlWebpackPlugin({
       template: 'index.html',
@@ -92,11 +93,14 @@ const config = {
       inlineSource: '.(js|css)$',
       minify: false,
     }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
   ],
 
   devServer: {
     static: {
-        directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'dist'),
     },
     port: 0,
     hot: true,

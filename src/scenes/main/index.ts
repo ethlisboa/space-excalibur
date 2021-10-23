@@ -1,3 +1,4 @@
+import { Button } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
@@ -17,6 +18,7 @@ export class SpaceBaseScene extends Scene {
   }
 
   preload() {
+    this.load.image('btn', 'assets/sprites/buttons/blank-btn.png')
     this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
     this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
     this.load.image('avatar', 'assets/sprites/avatar.png');
@@ -30,6 +32,7 @@ export class SpaceBaseScene extends Scene {
   }
 
   create(): void {
+    this.scene.launch("menu-scene");
 
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -49,9 +52,9 @@ export class SpaceBaseScene extends Scene {
     this.physics.add.existing(this.avatar, false);
 
     // Debugging
-    this.debugContainer = new DebugContainer(this);
-    this.add.existing(this.debugContainer);
-  }
+      this.debugContainer = new DebugContainer(this);
+      this.add.existing(this.debugContainer);
+    }
 
   update(): void {
     if (this.avatar) {
