@@ -1,4 +1,6 @@
 import { Scene } from "phaser";
+import { providers } from "ethers";
+import { web3Modal } from "../../actions/web3";
 import { Button } from "./buttons";
 
 export class MenuScene extends Scene {
@@ -11,7 +13,19 @@ export class MenuScene extends Scene {
     }
 
     create(): void {
-        this.add.existing(new Button(this, this.sys.game.canvas.width - 200, 50, "Connect"))
+        const connectButton = new Button(this, this.sys.game.canvas.width - 200, 50, "Connect");
+        connectButton.onClick(async () => {
+            const web3Provider = await web3Modal.connect();
+            const provider = new providers.Web3Provider(web3Provider);
+            if(await (await provider.getNetwork()).chainId !== 69) {
+                window.alert("Unsupported network. Only Optimistic Kovan is supported");
+                return;
+            }
+            const acc = await (await provider.getSigner()).getAddress();
+            connectButton.setText(acc);
+            connectButton.disable();
+        })
+        this.add.existing(connectButton);
     }
 
 }
