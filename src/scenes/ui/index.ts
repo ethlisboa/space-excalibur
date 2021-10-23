@@ -8,6 +8,7 @@ export class UIScene extends Scene {
     super('ui-scene')
   }
 
+
   create(): void {
     this.inventory = new Inventory(this, 25, 50, []);
   }

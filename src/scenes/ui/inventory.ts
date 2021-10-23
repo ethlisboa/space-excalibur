@@ -1,4 +1,4 @@
-import { Text } from './text';
+import { Text } from "./text";
 
 export enum InventoryState {
   ITEMS_EQUIPPED,
@@ -33,4 +33,5 @@ export class Inventory extends Text {
   public getInventory(): string[] {
     return this.currentInventory;
   }
+
 }
