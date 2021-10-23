@@ -1,7 +1,37 @@
+import { getWeb3Provider } from '../../../actions/web3';
 import { SpaceBaseScene } from "../index";
 import { Planet } from './planet';
+import { Galaxy } from 'spacexcalibur-contracts/typechain/Galaxy';
+import { Contract } from 'ethers';
+import { GameObjects } from 'phaser';
 
-export function renderPlanets(scene: SpaceBaseScene): Phaser.GameObjects.Group {
+
+const { abi: GalaxyABI, address: galaxyAddress } = require('spacexcalibur-contracts/deployments/optimistic/Galaxy.json');
+
+export async function renderPlanets(scene: SpaceBaseScene, group: GameObjects.Group): Promise<void> {
+  const provider = getWeb3Provider();
+  const contract = new Contract(galaxyAddress, GalaxyABI, provider) as Galaxy;
+  for (let i = 0; i <= 10; i++) {
+    try {
+      const celestial = await contract.map(i);
+      if (!celestial) break;
+      switch (celestial.kind) {
+        case 0: {
+          //planet
+          const planet = new Planet(scene, celestial.x.toNumber() * 100, celestial.y.toNumber() * 100, 'terrestrial');
+          planet.setAngle(Math.random() * 360);
+          scene.add.existing(planet);
+          group.add(planet);
+        }
+      }
+    } catch (e) {
+      break;
+    }
+  }
+
+}
+
+export function renderPlanets1(scene: SpaceBaseScene): Phaser.GameObjects.Group {
   const planetGroup = scene.add.group();
 
   // adds random planets
