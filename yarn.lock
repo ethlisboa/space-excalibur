@@ -5438,6 +5438,11 @@ source-map@~0.7.2:
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
+spacexcalibur-contracts@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/spacexcalibur-contracts/-/spacexcalibur-contracts-1.0.0.tgz#88b40e92678ee6a2863a48f20d910ff08a410840"
+  integrity sha512-l21tFhpgVTyMTvPlQCbxn1aEMcRdk+Sa8F4ehTh9vYiZinDxwTYKV2+bCtW4V/DPko3nfMpR0NpuZEll3QahPA==
+
 spdy-transport@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/spdy-transport/-/spdy-transport-3.0.0.tgz"
