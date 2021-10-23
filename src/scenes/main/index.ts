@@ -16,8 +16,14 @@ export class BaseMapScene extends Scene {
   }
 
   preload() {
-    this.load.image('avatar', 'assets/sprites/avatar.png')
-    this.load.image('planet-green', 'assets/sprites/planet_green.png')
+    this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
+    this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
+    this.load.image('avatar', 'assets/sprites/avatar.png');
+    this.load.image('moon', 'assets/sprites/moon.png');
+    this.load.image('planet-blue', 'assets/sprites/planet-blue.png');
+    this.load.image('planet-green', 'assets/sprites/planet-green.png');
+    this.load.image('planet-orange', 'assets/sprites/planet-orange.png');
+    this.load.image('terrestrial', 'assets/sprites/terrestrial.png');
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
   }
@@ -34,18 +40,6 @@ export class BaseMapScene extends Scene {
     this.map.createLayer("space", spaceTileset, 0, 0);
 
     // Random Planets
-    const planetGroup = this.add.group();
-    for (let i = 0; i < 100; i++) {
-      const planetSprite = this.make.sprite({
-        key: 'planet-green',
-        x: Phaser.Math.Between(0, this.map.widthInPixels),
-        y: Phaser.Math.Between(0, this.map.heightInPixels)
-      }, true).setInteractive({
-        useHandCursor: true
-      });
-      planetSprite.on(Input.Events.POINTER_DOWN, () => console.log("planet clicked"))
-      planetGroup.add(planetSprite);
-    }
     renderPlanets(this);
 
     // Avatar
