@@ -4,13 +4,11 @@ on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
-        node-version: "stable"
+        node-version: "16.10"
     - name: Install Dependencies
       run: |
         yarn --verbose install
