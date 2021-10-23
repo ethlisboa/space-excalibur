@@ -2,7 +2,6 @@ import { Console } from "console";
 import { Scene, GameObjects, Input } from "phaser";
 
 export class Button extends Phaser.GameObjects.Container {
-
     constructor(scene: Scene, x: number, y: number, txt: string) {
         super(scene, x, y);
         this.setSize(100, 50);
@@ -16,6 +15,19 @@ export class Button extends Phaser.GameObjects.Container {
             bg.setVisible(false);
             this.removeInteractive();
             setTimeout(() => bg.setVisible(true), 300);
+        })
+    }
+}
+
+export class Item extends Phaser.GameObjects.Container {
+    constructor(scene: Scene, x: number, y: number,) {
+        super(scene, x, y);
+        this.setSize(50, 50);
+        const bg = new GameObjects.Image(scene, 0, 0, 'box-1');
+        this.add(bg)
+        this.setInteractive({useHandCursor: true})
+        this.on(Input.Events.POINTER_DOWN, () => {
+            console.log("clicked");
         })
     }
 
