@@ -11,4 +11,4 @@ export const items = [
     name: "comet",
     quantity: "1",
   },
-]
+];

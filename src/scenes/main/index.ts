@@ -1,4 +1,3 @@
-import { Button, Item } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
@@ -39,7 +38,7 @@ export class SpaceBaseScene extends Scene {
 
     // Background
     this.map = this.make.tilemap({ key: 'map', tileWidth: 50, tileHeight: 50 });
-    const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
+    const spaceTileset = this.map.addTilesetImage('space', 'space-tileset');
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
