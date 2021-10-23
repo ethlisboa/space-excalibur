@@ -1,5 +1,5 @@
 import { Physics } from "phaser";
-import { BaseMapScene } from '.';
+import { BaseMapScene } from './index';
 
 export class Avatar extends Physics.Arcade.Sprite {
 
