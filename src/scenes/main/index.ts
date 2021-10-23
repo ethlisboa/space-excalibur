@@ -1,4 +1,4 @@
-import { Button, Item } from '../util/buttons';
+import { Button } from '../util/buttons';
 import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
@@ -33,6 +33,7 @@ export class SpaceBaseScene extends Scene {
 
   create(): void {
     this.scene.launch("menu-scene");
+    this.scene.launch("ui-scene");
 
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
