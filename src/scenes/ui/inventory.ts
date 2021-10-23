@@ -9,7 +9,7 @@ export class Inventory extends Text {
   private currentInventory: string[];
 
   constructor(scene: Phaser.Scene, x: number, y: number, initItem: string[] = [] ) {
-    super(scene, x, y, `Inventory: ${initItem}`);
+    super(scene, x, y, `Inventory: empty.`);
 
     scene.add.existing(this);
     this.currentInventory = initItem
@@ -21,7 +21,7 @@ export class Inventory extends Text {
         this.currentInventory == items;
         break;
       case InventoryState.ITEM_IN_PROGRESS:
-        this.currentInventory == items;
+        this.currentInventory == ["Making a new item..."];
         break;
       default:
         break;

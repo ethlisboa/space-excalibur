@@ -3,10 +3,12 @@ import { GameObjects, Scene } from 'phaser';
 export class Text extends GameObjects.Text {
   constructor(scene: Scene, x: number, y: number, text: string) {
     super(scene, x, y, text, {
-      fontSize: '32px',
+      fontSize: '24px',
       fontFamily: "Arial",
       color: '#fff',
-      strokeThickness: 1,
+      wordWrap: {
+        width: 200
+      },
     });
 
     this.setOrigin(0, 0);
