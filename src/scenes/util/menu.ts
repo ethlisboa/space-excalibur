@@ -43,8 +43,6 @@ export class MenuScene extends Scene {
         this.add.existing(connectButton);
 
 
-        this.add.existing(new Button(this, this.sys.game.canvas.width - 200, 50, "Connect"))
-
         for (let i = 0; i < items.length; i++) {
             this.add.existing(new Item(this, 50 + (60 * i), 50, items[i].quantity))
         }
