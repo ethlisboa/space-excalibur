@@ -1,4 +1,11 @@
 # SpaceXcalibur
+
+[![GitHub](https://img.shields.io/github/license/ethlisboa/space-excalibur)](LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/ethlisboa/space-excalibur)
+![Lines of code](https://img.shields.io/tokei/lines/github/ethlisboa/space-excalibur)
+![Amazing!](https://img.shields.io/badge/this%20repository%20is-amazing-ff69b4)
+[![Discord](https://img.shields.io/discord/894647872543400047?label=discord)](https://discord.gg/WQT8BKXk9N)
+
 The quest for the last energy saber.
 
 Installation
