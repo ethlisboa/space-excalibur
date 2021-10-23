@@ -33,9 +33,10 @@ export class BaseMapScene extends Scene {
 
     this.map = this.make.tilemap({key: 'map', tileWidth: 50, tileHeight: 50});
     const spaceTileset = this.map.addTilesetImage('space', 'space-tileset')
-    const planetsTileset = this.map.addTilesetImage('planets', 'planet')
+    const planetsTileset = this.map.addTilesetImage('planet', 'planet')
     const spaceLayer = this.map.createLayer("space", spaceTileset, 0, 0);
     const planetLayer = this.map.createLayer("planets", planetsTileset, 0, 0);
+
 
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     // Avatar
