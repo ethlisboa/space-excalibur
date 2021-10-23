@@ -21,6 +21,7 @@ export class SpaceBaseScene extends Scene {
     this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
     this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
     this.load.image('avatar', 'assets/sprites/avatar.png');
+    this.load.image('factory', 'assets/sprites/factory.png');
     this.load.image('moon', 'assets/sprites/moon.png');
     this.load.image('planet-blue', 'assets/sprites/planet-blue.png');
     this.load.image('planet-green', 'assets/sprites/planet-green.png');

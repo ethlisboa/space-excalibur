@@ -5,7 +5,7 @@ export function renderPlanets(scene: SpaceBaseScene): Phaser.GameObjects.Group {
   const planetGroup = scene.add.group();
 
   // adds random planets
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 73; i++) {
     const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
     const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
     const planet = new Planet(scene, x, y, 'terrestrial');
@@ -18,7 +18,7 @@ export function renderPlanets(scene: SpaceBaseScene): Phaser.GameObjects.Group {
   }
 
   // adds random asteroids
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 17; i++) {
     const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
     const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
     const asteroid = new Planet(scene, x, y, 'asteroid-fire');
@@ -28,13 +28,23 @@ export function renderPlanets(scene: SpaceBaseScene): Phaser.GameObjects.Group {
     planetGroup.add(asteroid);
   }
 
+  // adds random factories
+  for (let i = 0; i < 3; i++) {
+    const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
+    const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
+    const factory = new Planet(scene, x, y, 'factory');
+    factory.setAngle(Math.random() * 360);
+    scene.add.existing(factory);
+    planetGroup.add(factory);
+  }
+
   return planetGroup;
 }
 
 // adds moons to a planet near (x, y)
 function addMoons(x: number, y: number, group: Phaser.GameObjects.Group, scene: SpaceBaseScene): void {
   const maxMoonOffset = 150;
-  const numMoons = Math.floor(Math.random() * 4);
+  const numMoons = Math.floor(Math.random() * 5);
   for (let i = 0; i < numMoons; i++) {
     const _x = Math.floor(x + (Math.random() * maxMoonOffset) - maxMoonOffset / 2);
     const _y = Math.floor(y + (Math.random() * maxMoonOffset) - maxMoonOffset / 2);
