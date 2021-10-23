@@ -1,14 +1,14 @@
 export const items = [
   {
     name: "comet",
-    count: "1",
+    quantity: "1",
   },
   {
     name: "comet",
-    count: "1",
+    quantity: "3",
   },
   {
     name: "comet",
-    count: "1",
+    quantity: "1",
   },
 ]
