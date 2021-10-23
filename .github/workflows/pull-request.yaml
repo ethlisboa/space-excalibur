@@ -1,0 +1,17 @@
+name: Pull Requests
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: "lts/fermium"
+    - name: Install Dependencies
+      run: |
+        yarn install --frozen-lockfile --verbose
+    - name: Run Production Build
+      run: |
+        yarn --verbose build
