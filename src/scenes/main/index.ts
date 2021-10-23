@@ -84,7 +84,6 @@ export class BaseMapScene extends Scene {
   }
 
   getPositionXY(): string {
-    return "";
-    // return "TilePosition: " + this.background?.tilePositionX.toString() + "," + this.background?.tilePositionY.toString();
+    return "TilePosition: " + this.avatar?.getCenter().x.toString() + "," + this.avatar?.getCenter().y.toString();
   }
 }
