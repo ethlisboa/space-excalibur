@@ -1,16 +1,16 @@
 import { MenuScene } from './scenes/util/menu';
 import { Game, Types } from 'phaser';
-import { BaseMapScene } from './scenes';
+import { SpaceBaseScene } from './scenes/main/index';
 
 declare global {
-    interface Window {
-        sizeChanged: () => void;
-        game: Phaser.Game;
-     }
+  interface Window {
+    sizeChanged: () => void;
+    game: Phaser.Game;
+  }
 }
 
 const gameConfig: Types.Core.GameConfig = {
-	title: 'Phaser game tutorial',
+  title: 'SpaceXcalibur',
   type: Phaser.WEBGL,
   parent: 'game',
   backgroundColor: 'black',
@@ -29,6 +29,7 @@ const gameConfig: Types.Core.GameConfig = {
     antialiasGL: false,
     pixelArt: true,
   },
+  disableContextMenu: true,
   callbacks: {
     postBoot: () => {
       window.sizeChanged();
@@ -39,21 +40,21 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [BaseMapScene, MenuScene],
+  scene: [SpaceBaseScene, MenuScene],
 };
 
 window.sizeChanged = () => {
-    if (window.game.isBooted) {
-      setTimeout(() => {
-        window.game.scale.resize(window.innerWidth, window.innerHeight);
+  if (window.game.isBooted) {
+    setTimeout(() => {
+      window.game.scale.resize(window.innerWidth, window.innerHeight);
 
-        window.game.canvas.setAttribute(
-          'style',
-          `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
-        );
-      }, 100);
-    }
-  };
+      window.game.canvas.setAttribute(
+        'style',
+        `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
+      );
+    }, 100);
+  }
+};
 
 window.onresize = () => window.sizeChanged();
 

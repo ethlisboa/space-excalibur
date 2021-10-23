@@ -1,5 +1,5 @@
 import { Avatar } from './avatar';
-import { BaseMapScene } from './index';
+import { SpaceBaseScene } from './index';
 
 export class DebugContainer extends Phaser.GameObjects.Container {
 
@@ -8,7 +8,7 @@ export class DebugContainer extends Phaser.GameObjects.Container {
     private fontStyle = { font: "10px Mono", fill: "#fca" };
     private gameTick = 0;
 
-    constructor(scene: BaseMapScene) {
+    constructor(scene: SpaceBaseScene) {
         super(scene);
         this.debugText = scene.add.text(0, 0, "nil", this.fontStyle);
         this.containerBackground = scene.add.rectangle(0, 0, 0, 0, 0x000);

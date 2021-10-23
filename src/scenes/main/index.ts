@@ -1,16 +1,17 @@
 import { Button } from '../util/buttons';
 import { Avatar } from './avatar';
-import { Input, Scene } from 'phaser';
+import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
 import { DebugContainer } from './debug';
 
-export class BaseMapScene extends Scene {
+export class SpaceBaseScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
   public avatar?: Avatar;
   public cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
 
-  private isDebugging = true;
+  private isDebugging = false;
   private debugContainer?: DebugContainer;
+  private spaceObjects?: Phaser.GameObjects.Group;
 
   constructor() {
     super('map-scene');
@@ -43,8 +44,7 @@ export class BaseMapScene extends Scene {
     this.map.createLayer("space", spaceTileset, 0, 0);
 
     // Random Planets
-
-    renderPlanets(this);
+    this.spaceObjects = renderPlanets(this);
 
     // Avatar
     this.avatar = new Avatar(this);
@@ -52,10 +52,8 @@ export class BaseMapScene extends Scene {
     this.physics.add.existing(this.avatar, false);
 
     // Debugging
-    if (this.isDebugging) {
-      this.debugContainer = new DebugContainer(this);
-      this.add.existing(this.debugContainer);
-    }
+    this.debugContainer = new DebugContainer(this);
+    this.add.existing(this.debugContainer);
   }
 
   update(): void {
@@ -73,5 +71,9 @@ export class BaseMapScene extends Scene {
       }
     }
 
+    // rotates all planets
+    if (this.spaceObjects) {
+      this.spaceObjects.angle(Math.random());
+    }
   }
 }
