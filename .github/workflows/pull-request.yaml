@@ -11,7 +11,7 @@ jobs:
         node-version: "lts/fermium"
     - name: Install Dependencies
       run: |
-        yarn install --frozen-lockfile
+        yarn install --frozen-lockfile --verbose
     - name: Run Production Build
       run: |
-        yarn build
+        yarn --verbose build
