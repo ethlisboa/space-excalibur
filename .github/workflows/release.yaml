@@ -1,7 +1,8 @@
 name: Release
 on:
-  # manual trigger
-  workflow_dispatch:
+  push:
+    branches:
+      - "main"
 
 jobs:
   bump_version:
@@ -32,15 +33,17 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "lts/fermium"
           always-auth: true
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          yarn install --frozen-lockfile --verbose
 
       - name: Build the IPFS bundle
-        run: yarn build
+        run: |
+          yarn --verbose build
 
       - name: Pin to IPFS
         id: upload
@@ -64,7 +67,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
-          release_name: Release ${{ needs.bump_version.outputs.new_tag }}
+          release_name: SpaceXcalibur ${{ needs.bump_version.outputs.new_tag }}
           body: |
             IPFS hash of the deployment:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
