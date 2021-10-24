@@ -1,5 +1,4 @@
-import { Scene } from 'phaser';
-import { SpaceBaseScene } from '..';
+import { SpaceBaseScene } from '../index';
 import { ItemImg } from './itemImg';
 import { itemsMenu } from './test';
 

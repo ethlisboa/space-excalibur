@@ -9,7 +9,6 @@ export class Inventory extends Text {
   private currentInventory: string[];
 
   constructor(scene: Phaser.Scene, x: number, y: number, initItem: string[] = ["IronOre", "BlackSteel", "PureDiamonds"]) {
-
     super(scene, x, y, `Inventory: empty.`);
 
     scene.add.existing(this);
