@@ -10,10 +10,9 @@ const { abi: GalaxyABI, address: galaxyAddress } = require('spacexcalibur-contra
 export async function renderPlanets(scene: SpaceBaseScene, group: GameObjects.Group): Promise<void> {
   const provider = getWeb3Provider();
   const contract = new Contract(galaxyAddress, GalaxyABI, provider) as Galaxy;
-  for (let i = 0; i <= 10; i++) {
+  const celestials = await contract.getCelestials();
+  for (const celestial of celestials) {
     try {
-      const celestial = await contract.map(i);
-      if (!celestial) break;
       switch (celestial.kind) {
         case 0: {
           // Planet
@@ -21,21 +20,21 @@ export async function renderPlanets(scene: SpaceBaseScene, group: GameObjects.Gr
           planet.setAngle(Math.random() * 360);
           scene.add.existing(planet);
           group.add(planet);
-        }
+        } break;
         case 1: {
           // Asteroid
           const asteroid = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Asteroid');
           asteroid.setAngle(Math.random() * 360);
           scene.add.existing(asteroid);
           group.add(asteroid);
-        }
+        } break;
         case 2: {
           // Moon
           const moon = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Moon');
           moon.setAngle(Math.random() * 360);
           scene.add.existing(moon);
           group.add(moon);
-        }
+        } break;
         case 3: {
           // SpaceOven
           const factory = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'SpaceOven');
