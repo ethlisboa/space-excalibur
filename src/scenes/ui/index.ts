@@ -1,7 +1,7 @@
-import {Scene} from 'phaser';
-import { InventoryState, Inventory } from './inventory';
+import { Scene } from 'phaser';
+import { Inventory } from './inventory';
 
-export class UIScene extends Scene { 
+export class UIScene extends Scene {
   private inventory!: Inventory
 
   constructor() {
