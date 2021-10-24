@@ -7,8 +7,6 @@ import { renderInventory } from '../ui';
 export class SpaceBaseScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
   public avatar?: Avatar;
-  public cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
-
   private isDebugging = false;
   private debugContainer?: DebugContainer;
   private spaceObjects?: Phaser.GameObjects.Group;
@@ -35,6 +33,7 @@ export class SpaceBaseScene extends Scene {
     this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
     this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
     this.load.image('avatar', 'assets/sprites/avatar.png');
+    this.load.image('factory', 'assets/sprites/factory.png');
     this.load.image('moon', 'assets/sprites/moon.png');
     this.load.image('planet-blue', 'assets/sprites/planet-blue.png');
     this.load.image('planet-green', 'assets/sprites/planet-green.png');
@@ -47,9 +46,7 @@ export class SpaceBaseScene extends Scene {
   
   create(): void {
     this.scene.launch("menu-scene");
-
-    // Input Keys
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.scene.launch("ui-scene");
 
     // Background
     this.map = this.make.tilemap({ key: 'map', tileWidth: 50, tileHeight: 50 });
@@ -57,8 +54,9 @@ export class SpaceBaseScene extends Scene {
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    this.spaceObjects = this.add.group();
     // Random Planets
-    this.spaceObjects = renderPlanets(this);
+    renderPlanets(this, this.spaceObjects);
 
     // Inventory
     this.inventory = renderInventory(this);
@@ -77,7 +75,7 @@ export class SpaceBaseScene extends Scene {
     if (this.avatar) {
 
       // updates the avatar movement
-      this.avatar.update(this.cursors);
+      this.avatar.update();
 
       // updates the debug container
       if (this.debugContainer) {

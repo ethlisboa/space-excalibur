@@ -1,14 +1,14 @@
 export const itemsMenu = [
   {
-    name: "BlackSteel", 
+    name: "BlackSteel",
     count: 2
   },
   {
-    name: "PureDiamonds", 
+    name: "PureDiamonds",
     count: 2
   },
   {
-    name: "TerrestrialWood", 
+    name: "TerrestrialWood",
     count: 3
   },
 ]
