@@ -1,3 +1,4 @@
+import { Celestial } from 'spacexcalibur-contracts/typechain/Celestial';
 import { getWeb3Provider } from '../../../actions/web3';
 import { SpaceBaseScene } from "../index";
 import { Planet } from './planet';
@@ -11,33 +12,34 @@ export async function renderPlanets(scene: SpaceBaseScene, group: GameObjects.Gr
   const provider = getWeb3Provider();
   const contract = new Contract(galaxyAddress, GalaxyABI, provider) as Galaxy;
   const celestials = await contract.getCelestials();
+  let i = 0;
   for (const celestial of celestials) {
     try {
       switch (celestial.kind) {
         case 0: {
           // Planet
-          const planet = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Planet');
+          const planet = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Planet', String(i++));
           planet.setAngle(Math.random() * 360);
           scene.add.existing(planet);
           group.add(planet);
         } break;
         case 1: {
           // Asteroid
-          const asteroid = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Asteroid');
+          const asteroid = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Asteroid', String(i++));
           asteroid.setAngle(Math.random() * 360);
           scene.add.existing(asteroid);
           group.add(asteroid);
         } break;
         case 2: {
           // Moon
-          const moon = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Moon');
+          const moon = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Moon', String(i++));
           moon.setAngle(Math.random() * 360);
           scene.add.existing(moon);
           group.add(moon);
         } break;
         case 3: {
           // SpaceOven
-          const factory = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'SpaceOven');
+          const factory = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'SpaceOven', String(i++));
           factory.setAngle(Math.random() * 360);
           scene.add.existing(factory);
           group.add(factory);

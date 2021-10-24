@@ -15,7 +15,7 @@
     "buffer": "^6.0.3",
     "ethers": "^5.5.1",
     "phaser": "3.55.2",
-    "spacexcalibur-contracts": "^1.1.0",
+    "spacexcalibur-contracts": "1.3.0",
     "web3modal": "^1.9.4"
   },
   "devDependencies": {
