@@ -17,33 +17,33 @@ export class SpaceBaseScene extends Scene {
   }
 
   preload() {
-    //items
+    // Inventory Items
     this.load.image('BlackSteel', 'assets/sprites/BlackSteel.png');
     this.load.image('Charcoal', 'assets/sprites/Charcoal.png');
-    this.load.image('IronOre', 'assets/sprites/IronOre.png');
     this.load.image('EnergyCrystal', 'assets/sprites/EnergyCrystal.png');
     this.load.image('EpicOpal', 'assets/sprites/EpicOral.png');
+    this.load.image('IronOre', 'assets/sprites/IronOre.png');
+    this.load.image('PreciousDiamonds', 'assets/sprites/PreciousDiamonds.png');
+    this.load.image('PureGraphite', 'assets/sprites/PureGraphite.png');
+    this.load.image('RaccoonLeather', 'assets/sprites/RaccoonLeather.png');
     this.load.image('SaberHandle', 'assets/sprites/SaberHandle.png');
-    this.load.image('PureDiamonds', 'assets/sprites/PureDiamonds.png');
-    this.load.image('TerrestrialWood', 'assets/sprites/TerrestrialWood.png');
     this.load.image('SpaceRaccoon', 'assets/sprites/SpaceRaccoon.png');
+    this.load.image('TerrestrialWood', 'assets/sprites/TerrestrialWood.png');
 
-    // non-items
-    this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
-    this.load.image('asteroid-black', 'assets/sprites/asteroid-black.png');
-    this.load.image('asteroid-fire', 'assets/sprites/asteroid-fire.png');
+    // Celestials
+    this.load.image('Asteroid', 'assets/sprites/Asteroid.png');
+    this.load.image('Moon', 'assets/sprites/Moon.png');
+    this.load.image('Planet', 'assets/sprites/Planet.png');
+    this.load.image('SpaceOven', 'assets/sprites/Factory.png');
+
+    // Other Textures
     this.load.image('avatar', 'assets/sprites/avatar.png');
-    this.load.image('factory', 'assets/sprites/factory.png');
-    this.load.image('moon', 'assets/sprites/moon.png');
-    this.load.image('planet-blue', 'assets/sprites/planet-blue.png');
-    this.load.image('planet-green', 'assets/sprites/planet-green.png');
-    this.load.image('planet-orange', 'assets/sprites/planet-orange.png');
-    this.load.image('terrestrial', 'assets/sprites/terrestrial.png');
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
+    this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
   }
 
-  
+
   create(): void {
     this.scene.launch("menu-scene");
     this.scene.launch("ui-scene");
@@ -54,8 +54,8 @@ export class SpaceBaseScene extends Scene {
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    // Celestials
     this.spaceObjects = this.add.group();
-    // Random Planets
     renderPlanets(this, this.spaceObjects);
 
     // Inventory
