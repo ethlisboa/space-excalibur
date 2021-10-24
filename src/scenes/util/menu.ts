@@ -10,8 +10,6 @@ export class MenuScene extends Scene {
 
     preload() {
         this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
-        this.load.image('box-1', 'assets/sprites/box-1.png');
-        this.load.image('comet', 'assets/sprites/comet.png');
     }
 
     create(): void {

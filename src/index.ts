@@ -1,4 +1,5 @@
 import { MenuScene } from './scenes/util/menu';
+import { UiScene } from './scenes/ui';
 import { Game, Types } from 'phaser';
 import { SpaceBaseScene } from './scenes/main/index';
 
@@ -40,7 +41,7 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [SpaceBaseScene, MenuScene],
+  scene: [SpaceBaseScene, MenuScene, UiScene],
 };
 
 window.sizeChanged = () => {
