@@ -2,7 +2,6 @@ import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
 import { DebugContainer } from './debug';
-import { renderInventory } from '../ui';
 
 export class SpaceBaseScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
@@ -10,26 +9,12 @@ export class SpaceBaseScene extends Scene {
   private isDebugging = false;
   private debugContainer?: DebugContainer;
   private spaceObjects?: Phaser.GameObjects.Group;
-  private inventory?: Phaser.GameObjects.Group;
 
   constructor() {
     super('map-scene');
   }
 
   preload() {
-    // Inventory Items
-    this.load.image('BlackSteel', 'assets/sprites/BlackSteel.png');
-    this.load.image('Charcoal', 'assets/sprites/Charcoal.png');
-    this.load.image('EnergyCrystal', 'assets/sprites/EnergyCrystal.png');
-    this.load.image('EpicOpal', 'assets/sprites/EpicOral.png');
-    this.load.image('IronOre', 'assets/sprites/IronOre.png');
-    this.load.image('PreciousDiamonds', 'assets/sprites/PreciousDiamonds.png');
-    this.load.image('PureGraphite', 'assets/sprites/PureGraphite.png');
-    this.load.image('RaccoonLeather', 'assets/sprites/RaccoonLeather.png');
-    this.load.image('SaberHandle', 'assets/sprites/SaberHandle.png');
-    this.load.image('SpaceRaccoon', 'assets/sprites/SpaceRaccoon.png');
-    this.load.image('TerrestrialWood', 'assets/sprites/TerrestrialWood.png');
-
     // Celestials
     this.load.image('Asteroid', 'assets/sprites/Asteroid.png');
     this.load.image('Moon', 'assets/sprites/Moon.png');
@@ -39,7 +24,6 @@ export class SpaceBaseScene extends Scene {
     // Other Textures
     this.load.image('avatar', 'assets/sprites/avatar.png');
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
-    this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
   }
 
@@ -57,9 +41,6 @@ export class SpaceBaseScene extends Scene {
     // Celestials
     this.spaceObjects = this.add.group();
     renderPlanets(this, this.spaceObjects);
-
-    // Inventory
-    this.inventory = renderInventory(this);
 
     // Avatar
     this.avatar = new Avatar(this);

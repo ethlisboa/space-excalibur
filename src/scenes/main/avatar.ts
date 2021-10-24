@@ -62,7 +62,5 @@ export class Avatar extends Physics.Arcade.Sprite {
         } else {
             this.setScale(Math.max(this.scale * 0.99, 1.0));
         }
-
-        console.log(this.angle);
     }
 }
