@@ -2,6 +2,7 @@ import { Avatar } from './avatar';
 import { Scene } from 'phaser';
 import { renderPlanets } from './planets';
 import { DebugContainer } from './debug';
+import { renderInventory } from '../ui';
 
 export class SpaceBaseScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
@@ -11,6 +12,7 @@ export class SpaceBaseScene extends Scene {
   private isDebugging = false;
   private debugContainer?: DebugContainer;
   private spaceObjects?: Phaser.GameObjects.Group;
+  private inventory?: Phaser.GameObjects.Group;
 
   constructor() {
     super('map-scene');
@@ -45,7 +47,6 @@ export class SpaceBaseScene extends Scene {
   
   create(): void {
     this.scene.launch("menu-scene");
-    this.scene.launch("ui-scene");
 
     // Input Keys
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -58,6 +59,9 @@ export class SpaceBaseScene extends Scene {
 
     // Random Planets
     this.spaceObjects = renderPlanets(this);
+
+    // Inventory
+    this.inventory = renderInventory(this);
 
     // Avatar
     this.avatar = new Avatar(this);

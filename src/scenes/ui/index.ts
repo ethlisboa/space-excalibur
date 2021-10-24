@@ -1,15 +1,19 @@
 import {Scene} from 'phaser';
-import { InventoryState, Inventory } from './inventory';
-
-export class UIScene extends Scene { 
-  private inventory!: Inventory
-
-  constructor() {
-    super('ui-scene')
-  }
+import { SpaceBaseScene } from '..';
+import { ItemImg } from './itemImg';
+import {itemsMenu} from './test';
 
 
-  create(): void {
-    this.inventory = new Inventory(this, 25, 50, []);
-  }
+export function renderInventory(scene: SpaceBaseScene): Phaser.GameObjects.Group {
+
+  const itemsGroup = scene.add.group(); 
+    for (let i = 0; i < itemsMenu.length; i++) {
+      const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
+      const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
+      const itemSprite = new ItemImg(scene, x, y, itemsMenu[i].name)
+
+      scene.add.existing(itemSprite)
+      itemsGroup.add(itemSprite);
+    }
+    return itemsGroup;
 }
