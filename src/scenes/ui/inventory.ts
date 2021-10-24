@@ -8,7 +8,7 @@ export enum InventoryState {
 export class Inventory extends Text {
   private currentInventory: string[];
 
-  constructor(scene: Phaser.Scene, x: number, y: number, initItem: string[] = [] ) {
+  constructor(scene: Phaser.Scene, x: number, y: number, initItem: string[] = []) {
     super(scene, x, y, `Inventory: empty.`);
 
     scene.add.existing(this);

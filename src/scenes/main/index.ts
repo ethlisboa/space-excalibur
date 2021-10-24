@@ -6,8 +6,6 @@ import { DebugContainer } from './debug';
 export class SpaceBaseScene extends Scene {
   public map?: Phaser.Tilemaps.Tilemap;
   public avatar?: Avatar;
-  public cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
-
   private isDebugging = false;
   private debugContainer?: DebugContainer;
   private spaceObjects?: Phaser.GameObjects.Group;
@@ -35,9 +33,6 @@ export class SpaceBaseScene extends Scene {
     this.scene.launch("menu-scene");
     this.scene.launch("ui-scene");
 
-    // Input Keys
-    this.cursors = this.input.keyboard.createCursorKeys();
-
     // Background
     this.map = this.make.tilemap({ key: 'map', tileWidth: 50, tileHeight: 50 });
     const spaceTileset = this.map.addTilesetImage('space', 'space-tileset');
@@ -62,7 +57,7 @@ export class SpaceBaseScene extends Scene {
     if (this.avatar) {
 
       // updates the avatar movement
-      this.avatar.update(this.cursors);
+      this.avatar.update();
 
       // updates the debug container
       if (this.debugContainer) {
