@@ -36,8 +36,8 @@ export class SpaceBaseScene extends Scene {
     this.load.image('Planet', 'assets/sprites/Planet.png');
     this.load.image('SpaceOven', 'assets/sprites/Factory.png');
 
-    // Others
-    this.load.image('Avatar', 'assets/sprites/Avatar.png');
+    // Other Textures
+    this.load.image('avatar', 'assets/sprites/avatar.png');
     this.load.image('space-tileset', 'assets/map/Tilesets/space-tileset.png');
     this.load.image('btn', 'assets/sprites/buttons/blank-btn.png');
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
@@ -54,8 +54,8 @@ export class SpaceBaseScene extends Scene {
     this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.map.createLayer("space", spaceTileset, 0, 0);
 
+    // Celestials
     this.spaceObjects = this.add.group();
-    // Random Planets
     renderPlanets(this, this.spaceObjects);
 
     // Inventory
