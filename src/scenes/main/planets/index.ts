@@ -16,11 +16,32 @@ export async function renderPlanets(scene: SpaceBaseScene, group: GameObjects.Gr
       if (!celestial) break;
       switch (celestial.kind) {
         case 0: {
-          //planet
-          const planet = new Planet(scene, celestial.x.toNumber() * 100, celestial.y.toNumber() * 100, 'terrestrial');
+          // Planet
+          const planet = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Planet');
           planet.setAngle(Math.random() * 360);
           scene.add.existing(planet);
           group.add(planet);
+        }
+        case 1: {
+          // Asteroid
+          const asteroid = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Asteroid');
+          asteroid.setAngle(Math.random() * 360);
+          scene.add.existing(asteroid);
+          group.add(asteroid);
+        }
+        case 2: {
+          // Moon
+          const moon = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'Moon');
+          moon.setAngle(Math.random() * 360);
+          scene.add.existing(moon);
+          group.add(moon);
+        }
+        case 3: {
+          // SpaceOven
+          const factory = new Planet(scene, celestial.x.toNumber(), celestial.y.toNumber(), 'SpaceOven');
+          factory.setAngle(Math.random() * 360);
+          scene.add.existing(factory);
+          group.add(factory);
         }
       }
     } catch (e) {
@@ -37,7 +58,7 @@ export function renderPlanetsRandom(scene: SpaceBaseScene): Phaser.GameObjects.G
   for (let i = 0; i < 73; i++) {
     const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
     const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
-    const planet = new Planet(scene, x, y, 'terrestrial');
+    const planet = new Planet(scene, x, y, 'Planet');
     planet.setAngle(Math.random() * 360);
     scene.add.existing(planet);
     planetGroup.add(planet);
@@ -50,7 +71,7 @@ export function renderPlanetsRandom(scene: SpaceBaseScene): Phaser.GameObjects.G
   for (let i = 0; i < 17; i++) {
     const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
     const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
-    const asteroid = new Planet(scene, x, y, 'asteroid-fire');
+    const asteroid = new Planet(scene, x, y, 'Asteroid');
     asteroid.setAngle(Math.random() * 360);
     asteroid.setScale(0.5, 0.5);
     scene.add.existing(asteroid);
@@ -61,7 +82,7 @@ export function renderPlanetsRandom(scene: SpaceBaseScene): Phaser.GameObjects.G
   for (let i = 0; i < 3; i++) {
     const x = Phaser.Math.Between(0, scene.map?.widthInPixels ?? 0);
     const y = Phaser.Math.Between(0, scene.map?.heightInPixels ?? 0);
-    const factory = new Planet(scene, x, y, 'factory');
+    const factory = new Planet(scene, x, y, 'SpaceOven');
     factory.setAngle(Math.random() * 360);
     scene.add.existing(factory);
     planetGroup.add(factory);
@@ -77,7 +98,7 @@ function addMoons(x: number, y: number, group: Phaser.GameObjects.Group, scene: 
   for (let i = 0; i < numMoons; i++) {
     const _x = Math.floor(x + (Math.random() * maxMoonOffset) - maxMoonOffset / 2);
     const _y = Math.floor(y + (Math.random() * maxMoonOffset) - maxMoonOffset / 2);
-    const moon = new Planet(scene, _x, _y, 'moon');
+    const moon = new Planet(scene, _x, _y, 'Moon');
     moon.setAngle(Math.random() * 360);
     scene.add.existing(moon);
     group.add(moon);
