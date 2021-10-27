@@ -7,6 +7,8 @@ const opts: IProviderOptions = {
     walletconnect: {
         package: WalletConnectProvider, // required
         options: {
+            network: "kovan",
+            cacheProvider: false,
             infuraId: "fd1f29ab70844ef48e644489a411d4b3" // required
         }
     }
@@ -24,5 +26,9 @@ export function getWeb3Provider(): JsonRpcProvider {
 
 
 export async function getWeb3Signer(): Promise<Web3Provider> {
-    return new providers.Web3Provider(await web3Modal.connect())
+    const provider = new providers.Web3Provider(await web3Modal.connect())
+    if(provider.network.chainId !== 69) {
+      throw new Error("Invalid network")
+    }
+    return provider;
 }
