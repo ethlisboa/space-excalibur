@@ -27,7 +27,7 @@ export function getWeb3Provider(): JsonRpcProvider {
 
 export async function getWeb3Signer(): Promise<Web3Provider> {
     const provider = new providers.Web3Provider(await web3Modal.connect())
-    if(provider.network.chainId !== 69) {
+    if((await provider.getNetwork()).chainId !== 69) {
       throw new Error("Invalid network")
     }
     return provider;

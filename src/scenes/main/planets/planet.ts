@@ -39,9 +39,14 @@ export class Planet extends Phaser.GameObjects.Sprite {
                 console.log(e);
             }
 
-            const signer = await getWeb3Signer();
-            const contract = new Contract(planetAddress, PlanetABI, signer.getSigner()) as PlanetContract;
-            await contract.collect("0x36Ca879e11aA582AB92d43547da1EA5cFd57067b", this.id);
+            try {
+                const signer = await getWeb3Signer();
+                const contract = new Contract(planetAddress, PlanetABI, signer.getSigner()) as PlanetContract;
+                await contract.collect("0x36Ca879e11aA582AB92d43547da1EA5cFd57067b", this.id);
+            } catch (e) {
+                window.alert((e as Error).message);
+            }
+
         });
     }
 
